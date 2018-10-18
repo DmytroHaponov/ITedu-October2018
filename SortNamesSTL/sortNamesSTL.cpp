@@ -12,7 +12,7 @@ SortNamesSTL::SortNamesSTL(){}
 //writing in file 5k names//
 void SortNamesSTL::WriteToFile(){
     std::string arr[81] = {"Peter", "Katya", "Ann", "Steve", "John"};
-    std::ofstream fileo("/home/ngb/Desktop/C++/HW/SortNames/Names");
+    std::ofstream fileo("Names");
     if(fileo.is_open()){
         for(int i = 0; i < 1000; i++){
             for (int j = 0; j < 5; j++){
@@ -30,7 +30,7 @@ void SortNamesSTL::WriteToFile(){
 
 //writing names to deque//
 void SortNamesSTL::ReadFromFile(){
-    std::ifstream file("/home/ngb/Desktop/C++/HW/SortNames/Names");
+    std::ifstream file("Names");
     std::string str;
     if (file.is_open()){
         for (int i = 0; i < 5000; i++){
@@ -51,7 +51,7 @@ void SortNamesSTL::SortDeque(){
 
 //writing names and sorting in set//
 void SortNamesSTL::GetSet(){
-    std::ifstream file("/home/ngb/Desktop/C++/HW/SortNames/Names");
+    std::ifstream file("Names");
     std::string str;
     if (file.is_open()){
         for (int i = 0; i < 5000; i++){
@@ -73,8 +73,8 @@ void SortNamesSTL::PrintSet(){
 
 //destructor//
 SortNamesSTL::~SortNamesSTL(){
-    delete[] &names;
-    delete[] &MySet;
+    names.clear();
+    MySet.clear();
 }
 
 //output in console//

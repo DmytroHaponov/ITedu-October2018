@@ -11,7 +11,7 @@ NamesSortWoSTL::NamesSortWoSTL(){}
 //Writing in file 5k names//
 void NamesSortWoSTL::AddToFile(){
     std::string arr[81] = {"Peter ", "Katya ", "Ann ", "Steve ", "John "};
-    std::ofstream fileo("/home/ngb/Desktop/C++/HW/Names/name");
+    std::ofstream fileo("name");
     if(fileo.is_open()){
         for(int i = 0; i < 1000; i++){
             for (int j = 0; j < 5; j++){
@@ -28,7 +28,7 @@ void NamesSortWoSTL::AddToFile(){
 
 //writing names from file to string array//
     std::string NamesSortWoSTL::ReadFromFile(){
-    std::ifstream file("/home/ngb/Desktop/C++/HW/Names/name");
+    std::ifstream file("name");
     if (file.is_open()){
         for (int i = 0; i < size-1; i++){
         file >> temp;
@@ -43,7 +43,7 @@ void NamesSortWoSTL::AddToFile(){
 }
     //writing to char array for calculate weight//
     char NamesSortWoSTL::WriteToArray(){
-        std::ifstream file("/home/ngb/Desktop/C++/HW/Names/name");
+        std::ifstream file("name");
         if (file.is_open()){
             file.get(ascii,len);
         }
