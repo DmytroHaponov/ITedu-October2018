@@ -13,7 +13,7 @@ private:
 public:
     ForSort(const char *ch);
     ~ForSort();
-    void operator()();
+    std::deque<char> operator()();
     void print();
 };
 

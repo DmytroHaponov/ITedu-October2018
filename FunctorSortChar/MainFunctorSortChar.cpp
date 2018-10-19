@@ -6,9 +6,9 @@
 #include <ForSort.h>
 
 int main(){
-
-    char Ch[] = {'e','c','b','a','d','z','a','q', 'w'};
-    char *ch = Ch;
+    char *ch = new char[256];
+    std::cout << "Enter symbols without space to sort, space is end of line" << std::endl;
+    std::cin >> ch;
     ForSort st(ch);
     st();
     st.print();
