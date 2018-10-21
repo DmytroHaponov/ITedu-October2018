@@ -5,9 +5,7 @@
 
 using namespace testing;
 
-
-//void read_from_file(char **names,int words_number,char filename[])
-TEST(test_of_sort, testing_func)
+TEST(sorting_names_test, testapp)
 {
     int words_number = 5000;
     char filename_actual[14] = "Actual.txt";
@@ -46,8 +44,8 @@ TEST(test_of_sort, testing_func)
         delete [] expected[i];
     }
     delete [] expected;
-}
 
+}
 //TEST(DISABLE_test_of_file_read, testing_func)
 //{
 //    int words_number = 10;

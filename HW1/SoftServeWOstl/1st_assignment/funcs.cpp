@@ -59,21 +59,38 @@ int generate_file(char *name)
     int index = 0;//индекс рандомной буквы в массиве всех возможных букв для задания имен
     char allletters[16] = "esytumiporvaskc";
     char ALLLETTERS[16] = "ESYTUMIPORVASKC";
+    char trashsymbols[22] = "!~#$%^&*()_+ |/.,<>+-";
     char current_letter;//буква которая будет записана в файл, т. к. запись производится побуквенно
+
+    int random_trash_symbols = 0;
 
     while (word_number > 0)
     {
         letter_number = rand()%7 + 4;//букв в слове
         for (int i = 1; i <= letter_number; i++)
         {
-            index = rand()%15;//16 - кол-во элементов в массиве букв, а 15 - индекс 16 элемента//рандомим букву
 
-            i == 1 ? current_letter = ALLLETTERS[index] : current_letter = allletters[index];// 1я буква будет заглавной
+            random_trash_symbols = rand()%10;
+
+            if (random_trash_symbols == 1 && i != 1)
+            {
+                current_letter = trashsymbols[rand()%20];
+            }
+            else
+            {
+                index = rand()%15;//16 - кол-во элементов в массиве букв, а 15 - индекс 16 элемента//рандомим букву
+
+                i == 1 ? current_letter = ALLLETTERS[index] : current_letter = allletters[index];// 1я буква будет заглавной
+            }
 
             fout << current_letter;
         }
 
         fout << sep;//??????????\\\\n
+        if (rand()%7 == 1 || rand()%7 == 0)
+        {
+            fout << trashsymbols[rand()%20];
+        }
         word_number--;
     }
     fout.close();
@@ -93,36 +110,47 @@ void read_from_file(char **names,int words_number,char filename[])//, std::strin
         exit(1);
     }
 
-    int i = 0;
-    while (!fin.eof())
-    {
+    char arr_of_trash[] = "/.,:'\"1234567890|-=!?@#$%^&*()_+~`';<>{}[]";
+    char small_letters[] = "qwertyuiopasdfghjklzxcvbnm";
 
-        if (i < words_number)
+    int i = -1;
+    char letter;
+    bool var_shows_new_word_starts(1);
+    int k = 0;
+    bool trash_indicator = 0;
+    int m = 0;//added to be able not to zero out k-counter when name is split by trash-symbols
+    while (fin.get(letter))
+    {
+        if (letter != ' ' && letter != '\n' && letter != '\t' && letter != '\v' && !is_in_arr(letter, arr_of_trash))
         {
-            fin >> names[i];
-            //names[i] = name;
-//            for (unsigned int k = 0; k < strlen(name); k++)
-//            {
-//                std::cout << name[k] << '\n';
-//                names[i][k] = name[k];
-//            }
-            std::cout << names[i] << std::endl;
-            i++;
+            m = k;
+            if (trash_indicator && is_in_arr(letter, small_letters))
+            {
+                i--;
+                k += k;
+                trash_indicator = 0;
+            }
+
+            if (var_shows_new_word_starts)
+            {
+                i++;
+                k -= m;
+            }
+            var_shows_new_word_starts = 0;
+            std::cout << letter << '\n';
+            names[i][k] = letter;
+            k++;
+            trash_indicator = 0;
         }
         else
         {
-            break;
+            trash_indicator = 1;//indicates thatthere were some trash;
+            var_shows_new_word_starts = 1;
+
+            //std::cout << names[i] << std::endl;
         }
     }
-//    for (int i = 0; i < 10; i++)
-//    {
-//        name[i] = 'b';
-//    }
-//    for (int i = 0; i < 10; i++)
-//    {
-//        std::cout << name[i];
-//    }
-//    std::cout << '\n';
+
     std::cout << "\\\\\\////\n";
     for (int j = 0; j < words_number; j++)
     {
@@ -139,17 +167,32 @@ void read_from_file(char **names,int words_number,char filename[])//, std::strin
 void assign_string(char array1[], char tobeassigned[]) //функция присвоения одной строки другой//
 {
     int i = 0;
-    while (array1[i] != '\0') //&& tobeassigned[i] != '\0')
+    //char *ptr_tobeassig;
+    char *ptr_arr;//создаем указатель, что в дальнейшем будет указывать на массив.
+    if (strlen(array1) >= strlen(tobeassigned))//сравниваем длины массивов (т к мы будем проходить циклом вайл по одной из строк и эта строка должна быть самой длинной, дабы не было нежелательного урезания длины строки)
+    {
+        ptr_arr = array1;
+        //ptr_tobeassig = tobeassigned;
+    }
+    else
+    {
+        ptr_arr = tobeassigned;
+        //ptr_tobeassig = array1;
+    }
+    while (ptr_arr[i] != '\0') //&& tobeassigned[i] != '\0')
     {
         array1[i] = tobeassigned[i];//
         i++;
     }
+    ptr_arr[i] = '\0';
+    ptr_arr = nullptr;
+    //ptr_tobeassig = nullptr;
 }
 
 
 bool compare (char array1[], char array2[])
 {
-    int len = 0;
+    unsigned long len = 0;
     char alphab_cap[] = "ZYXWVUTSRQPONMLKJIHGFEDCBA";
     char alphab[] = "zyxwvutsrqponmlkjihgfedcba";
 
@@ -160,7 +203,7 @@ bool compare (char array1[], char array2[])
     else
         len = strlen(array2);//array2 наименьший
 
-    for (int i = 0; i < len; i++)//
+    for (unsigned int i = 0; i < len; i++)//
     {
         counter1 = is_in(array1[i], alphab, alphab_cap);
         counter2 = is_in(array2[i], alphab, alphab_cap);
@@ -199,11 +242,25 @@ void sort(char **array,const int &number_of_elements)
         }
     }
 }
-
-
-int is_in (char n, char alphab[], char alphab_cap[])
+bool is_in_arr(char element_to_seek4, char* arr)
 {
-    char count = 0;
+    bool is_in = 0;
+    int count = 0;
+    while (arr[count] != '\0')
+    {
+        if (arr[count] == element_to_seek4)
+        {
+            is_in = 1;
+            break;
+        }
+        count++;
+    }
+    return  is_in;
+}
+
+int is_in (char n, char alphab[], char alphab_cap[])//alphab_cap = alphabet capitalized;
+{
+    int count = 0;///////
     while (alphab[count] != '\0')
     {
         if (alphab[count] == n)
@@ -217,6 +274,7 @@ int is_in (char n, char alphab[], char alphab_cap[])
             return count;
         count++;
     }
+    return count;//may not be needed
 }
 
 int hash (char **names,int number_words)//вторая переменная отвечает за к-во слов;
