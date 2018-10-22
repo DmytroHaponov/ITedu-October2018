@@ -1,7 +1,5 @@
 #include "MaxPalindrom.h"
-#include <iostream>
-#include <string>
-#include <sstream>
+
 
 template <typename T>
 std::string toString(T val){

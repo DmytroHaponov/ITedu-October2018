@@ -1,7 +1,4 @@
 #include "MaxPalindrom.h"
-#include <iostream>
-#include <string>
-#include <sstream>
 
 int main(){
 
