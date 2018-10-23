@@ -1,28 +1,25 @@
 #include "header.h"
-//#include <fstream>
+#include <random>
+
 int generate_file(char *name)
 {
-    srand(time(NULL));
 
-    //std::string name;
-    //char name [20];
+    srandom(time(NULL));
+
     std::ofstream fout;
 
     std::cout << "Enter the name of the file: ";
     std::cin >> name;
 
-    //очистка потока//
     std::cin.clear();
     std::cin.ignore(2, '\n');
 
-    fout.open(name);//, std::ofstream::app);
+    fout.open(name);
 
-    //ПРОВЕРКА ОТКРЫТИЯ//
     if (!fout.is_open())
     {
         std::cout << "File openning error" << std::endl;
-        //return;
-        exit(1);
+        return 0;
     }
 
     int word_number = 10;
@@ -45,28 +42,24 @@ int generate_file(char *name)
         sep = '\t';
         break;
     default:
-        // std::cout << "Bad INput";
-        // return;/..or../exit(1);
         sep = '\n';
     }
 
-    //очистка потока//
     std::cin.clear();
     std::cin.ignore(10, '\n');
-//    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     int letter_number = 0;
-    int index = 0;//индекс рандомной буквы в массиве всех возможных букв для задания имен
+    int index = 0;
     char allletters[16] = "esytumiporvaskc";
     char ALLLETTERS[16] = "ESYTUMIPORVASKC";
     char trashsymbols[22] = "!~#$%^&*()_+ |/.,<>+-";
-    char current_letter;//буква которая будет записана в файл, т. к. запись производится побуквенно
+    char current_letter;
 
     int random_trash_symbols = 0;
 
     while (word_number > 0)
     {
-        letter_number = rand()%7 + 4;//букв в слове
+        letter_number = rand()%7 + 4;
         for (int i = 1; i <= letter_number; i++)
         {
 
@@ -78,15 +71,14 @@ int generate_file(char *name)
             }
             else
             {
-                index = rand()%15;//16 - кол-во элементов в массиве букв, а 15 - индекс 16 элемента//рандомим букву
-
-                i == 1 ? current_letter = ALLLETTERS[index] : current_letter = allletters[index];// 1я буква будет заглавной
+                index = rand()%15;
+                i == 1 ? current_letter = ALLLETTERS[index] : current_letter = allletters[index];
             }
 
             fout << current_letter;
         }
 
-        fout << sep;//??????????\\\\n
+        fout << sep;
         if (rand()%7 == 1 || rand()%7 == 0)
         {
             fout << trashsymbols[rand()%20];
@@ -97,11 +89,9 @@ int generate_file(char *name)
     return words;
 }
 
-void read_from_file(char **names,int words_number,char filename[])//, std::string filename)
+void read_from_file(char **names,int words_number,char filename[])
 {
     std::ifstream fin;
-    //std::string name; //строка для хранения имен в массиве;
-    //char name[10];
     fin.open (filename);
 
     if (!fin.is_open())
@@ -118,7 +108,7 @@ void read_from_file(char **names,int words_number,char filename[])//, std::strin
     bool var_shows_new_word_starts(1);
     int k = 0;
     bool trash_indicator = 0;
-    int m = 0;//added to be able not to zero out k-counter when name is split by trash-symbols
+    int m = 0;//added not to zero out k-counter when name is split by trash-symbols
     while (fin.get(letter))
     {
         if (letter != ' ' && letter != '\n' && letter != '\t' && letter != '\v' && !is_in_arr(letter, arr_of_trash))
@@ -147,7 +137,6 @@ void read_from_file(char **names,int words_number,char filename[])//, std::strin
             trash_indicator = 1;//indicates thatthere were some trash;
             var_shows_new_word_starts = 1;
 
-            //std::cout << names[i] << std::endl;
         }
     }
 
@@ -155,38 +144,29 @@ void read_from_file(char **names,int words_number,char filename[])//, std::strin
     for (int j = 0; j < words_number; j++)
     {
         std::cout << names[j] << std::endl;
-//        for (int i = 0; i < strlen(names[j]); i++)
-//        {
-//            std::cout << names[j][i];
-//        }
-//        std::cout << '\n';
     }
     fin.close();
 }
 
-void assign_string(char array1[], char tobeassigned[]) //функция присвоения одной строки другой//
+void assign_string(char array1[], char tobeassigned[]) 
 {
     int i = 0;
-    //char *ptr_tobeassig;
-    char *ptr_arr;//создаем указатель, что в дальнейшем будет указывать на массив.
-    if (strlen(array1) >= strlen(tobeassigned))//сравниваем длины массивов (т к мы будем проходить циклом вайл по одной из строк и эта строка должна быть самой длинной, дабы не было нежелательного урезания длины строки)
+    char *ptr_arr;
+    if (strlen(array1) >= strlen(tobeassigned)) 
     {
         ptr_arr = array1;
-        //ptr_tobeassig = tobeassigned;
     }
     else
     {
         ptr_arr = tobeassigned;
-        //ptr_tobeassig = array1;
     }
-    while (ptr_arr[i] != '\0') //&& tobeassigned[i] != '\0')
+    while (ptr_arr[i] != '\0')
     {
-        array1[i] = tobeassigned[i];//
+        array1[i] = tobeassigned[i];
         i++;
     }
     ptr_arr[i] = '\0';
     ptr_arr = nullptr;
-    //ptr_tobeassig = nullptr;
 }
 
 
@@ -198,10 +178,10 @@ bool compare (char array1[], char array2[])
 
     int counter1 = 0, counter2 = 0;
 
-    if (strcmp(array1, array2) < 0)//ищем наименьшую строку
-        len = strlen(array1);//array1 наименьший
+    if (strcmp(array1, array2) < 0)
+        len = strlen(array1);//array1 shorter
     else
-        len = strlen(array2);//array2 наименьший
+        len = strlen(array2);//array2 shorter
 
     for (unsigned int i = 0; i < len; i++)//
     {
@@ -216,8 +196,7 @@ bool compare (char array1[], char array2[])
             return 0;
         }
     }
-     //если вышли из цикла, значит слова равны, но одно из них возможно короче. Ищем короткое слово
-     if (len == strlen(array1))//если первое слово оказалось короче, то такое слово идет первым в алфавитном порядке
+     if (len == strlen(array1))
      {
          return 1;
      }
@@ -258,9 +237,9 @@ bool is_in_arr(char element_to_seek4, char* arr)
     return  is_in;
 }
 
-int is_in (char n, char alphab[], char alphab_cap[])//alphab_cap = alphabet capitalized;
+int is_in (char n, char alphab[], char alphab_cap[])
 {
-    int count = 0;///////
+    int count = 0;
     while (alphab[count] != '\0')
     {
         if (alphab[count] == n)
@@ -274,22 +253,19 @@ int is_in (char n, char alphab[], char alphab_cap[])//alphab_cap = alphabet capi
             return count;
         count++;
     }
-    return count;//may not be needed
+    return count;
 }
 
-int hash (char **names,int number_words)//вторая переменная отвечает за к-во слов;
+int hash (char **names,int number_words)
 {
     int temp = 0;
-    int count = 0; //переменная для сбора аски символов всех букв в слове
+    int count = 0; 
     for (int j = 0; j < number_words; j++)
     {
-        //for (int i = 0; i < 10; i++)
         int i = 0;
         while (names[j][i] != '\0')
         {
-            //count += names[j][i];
             temp += static_cast<int>(names[j][i]);
-            //std::cout << names[j][i] << std::endl;
             i++;
         }
         temp /= i;
@@ -299,7 +275,7 @@ int hash (char **names,int number_words)//вторая переменная от
     return count;
 }
 
-void write_in_file(char **names, int words_number)//, char sep = '\n')
+void write_in_file(char **names, int words_number)
 {
     std::ofstream fout;
     fout.open("SortedFile.txt");

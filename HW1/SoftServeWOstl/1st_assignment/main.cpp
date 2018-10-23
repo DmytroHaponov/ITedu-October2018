@@ -7,7 +7,6 @@ int main(int argc, char *argv[])
 {
     char name_of_file[] = "MyFile.txt";
 
-//    int words_number = generate_file(name_of_file);
     int words_number = 20;
 
     char **names = new char*[words_number];
