@@ -61,7 +61,9 @@ void SortNamesSTL::GetSet(){
 
 //output in console//
 void SortNamesSTL::PrintSet(){
-        copy( MySet.begin(), MySet.end(), std::ostream_iterator<std::string>(std::cout,"\n") );
+    for(const auto& i : MySet){
+        std::cout << i << std::endl;
+    }
         std::cout << std::endl;
     }
 
@@ -73,6 +75,8 @@ SortNamesSTL::~SortNamesSTL(){
 
 //output in console//
 void SortNamesSTL::PrintDeque(){
-    copy( names.begin(), names.end(), std::ostream_iterator<std::string>(std::cout,"\n") );
+    for(const auto& i : names){
+        std::cout << i << std::endl;
+    }
     std::cout << std::endl;
 }
