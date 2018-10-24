@@ -78,11 +78,12 @@
                     k++;
                 }
            }
-            else
+            else{
                for(int h = i; h <= mid ; h++){
                    tmp[k].assign(names[h]);
                    k++;
                }
+            }
                for(int i = low; i <= hight ; i++){
                     names[i].assign(tmp[i]);
                }
