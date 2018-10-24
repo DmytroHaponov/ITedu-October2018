@@ -7,7 +7,7 @@
 #include <deque>
 
 /*
-    I made some changes to functions from HW1.
+    I made some changes to functions from HW2.
     Added two new function which write data from array to string/deque.
     Added new arguments to adapt functions to a variety of variables(string,deque).
 */
