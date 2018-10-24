@@ -1,6 +1,12 @@
 #include "mergesort.h"
 
+/*
+ * Program input string and sort it with merge sort algorithm
+*/
+
 StringSort::StringSort(){}
+
+//function sort string with merge sort algorithm//
 
 void StringSort::mergeSort(int low, int hight){
     int mid = 0;
@@ -11,6 +17,8 @@ void StringSort::mergeSort(int low, int hight){
         merge(low, mid, hight);
     }
 }
+
+//merge sort algorithm//
 
 void StringSort::merge(int low, int mid, int hight){
     int i = low;
@@ -43,16 +51,22 @@ void StringSort::merge(int low, int mid, int hight){
            }
 }
 
+//output in console//
+
 void StringSort::print(){
     for(int i = 0; i < len; i++){
         std::cout << names[i];
     }
 }
 
+//return memory//
+
 StringSort::~StringSort(){
     delete[]names;
     delete[]tmp;
 }
+
+//copy strings//
 
 std::string StringSort::add(const std::string *str){
     for(int i = 0; i < len; i++){

@@ -1,9 +1,16 @@
 #include "sortNamesSTL.h"
 
 
+/*
+ * Program open text file, write in 5000 names, read from file all names,
+ * write names to STL deque and set, after that sort all names with stable_sort
+ * algorithm, output names in console.
+*/
+
 SortNamesSTL::SortNamesSTL(){}
 
 //writing in file 5k names//
+
 void SortNamesSTL::WriteToFile(){
     std::string arr[81] = {"Peter", "Katya", "Ann", "Steve", "John"};
     std::ofstream fileo("Names");
@@ -22,7 +29,8 @@ void SortNamesSTL::WriteToFile(){
     fileo.close();
 }
 
-//writing names to deque//
+//reading from file and writing names to deque//
+
 void SortNamesSTL::ReadFromFile(){
     std::ifstream file("Names");
     std::string str;
@@ -39,11 +47,13 @@ void SortNamesSTL::ReadFromFile(){
 }
 
 //sorting names in deque//
+
 void SortNamesSTL::SortDeque(){
     std::stable_sort(names.begin(), names.end());
 }
 
 //writing names and sorting in set//
+
 void SortNamesSTL::GetSet(){
     std::ifstream file("Names");
     std::string str;
@@ -59,7 +69,8 @@ void SortNamesSTL::GetSet(){
     file.close();
 }
 
-//output in console//
+//output in console STL set//
+
 void SortNamesSTL::PrintSet(){
     for(const auto& i : MySet){
         std::cout << i << std::endl;
@@ -67,13 +78,15 @@ void SortNamesSTL::PrintSet(){
         std::cout << std::endl;
     }
 
-//destructor//
+//clear data in conteiners//
+
 SortNamesSTL::~SortNamesSTL(){
     names.clear();
     MySet.clear();
 }
 
-//output in console//
+//output in console STL deque//
+
 void SortNamesSTL::PrintDeque(){
     for(const auto& i : names){
         std::cout << i << std::endl;

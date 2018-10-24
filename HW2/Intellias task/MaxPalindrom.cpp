@@ -1,5 +1,8 @@
 #include "MaxPalindrom.h"
 
+/*
+ Program find the largest palindrome made of product of two 3-digit numbers
+*/
 
 template <typename T>
 std::string toString(T val){

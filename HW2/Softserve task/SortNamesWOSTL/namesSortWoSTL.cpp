@@ -1,6 +1,14 @@
 #include "namesSortWoSTL.h"
 
+/*
+ * Program open text file, write in 5000 names, read from file all names,
+ * write names to string and sort all names with merge sort algorithm, output
+ * string in console, accumulate weight all letters, like A = 1, B = 2, AB = 3;
+*/
+
 NamesSortWoSTL::NamesSortWoSTL(){}
+
+//writing in file 5000 names//
 
 void NamesSortWoSTL::AddToFile(){
     std::string arr[81] = {"Peter ", "Katya ", "Ann ", "Steve ", "John "};
@@ -19,6 +27,8 @@ void NamesSortWoSTL::AddToFile(){
     fileo.close();
 }
 
+//read from file 5k names and writing in srtring array//
+
     std::string NamesSortWoSTL::ReadFromFile(){
     std::ifstream file("name");
     if (file.is_open()){
@@ -33,7 +43,9 @@ void NamesSortWoSTL::AddToFile(){
     file.close();
     return *names;
 }
+
     //writing to char array for calculate weight//
+
     char NamesSortWoSTL::WriteToArray(){
         std::ifstream file("name");
         if (file.is_open()){
@@ -46,7 +58,8 @@ void NamesSortWoSTL::AddToFile(){
         return *ascii;
     }
 
-//sorting//
+//sorting with merge sort algorithm//
+
     void NamesSortWoSTL::mergeSort(int low, int hight){
         int mid = 0;
         if(low < hight){
@@ -56,6 +69,8 @@ void NamesSortWoSTL::AddToFile(){
             merge(low, mid, hight);
         }
     }
+
+//algoritm for merge sort//
 
     void NamesSortWoSTL::merge(int low, int mid, int hight){
         int i = low;
@@ -88,7 +103,8 @@ void NamesSortWoSTL::AddToFile(){
                }
     }
 
-//print names//
+//output names from array to console //
+
 void NamesSortWoSTL::Print(){
     for(int i = 0; i < size-1; ++i){
         std::cout <<  names[i] << ' ';
@@ -96,14 +112,16 @@ void NamesSortWoSTL::Print(){
     std::cout << std::endl;
 }
 
-//destructor//
+//return memory for deallocate//
+
 NamesSortWoSTL::~NamesSortWoSTL(){
     delete[] ascii;
     delete[] names;
     delete[] tmp;
 }
 
-//calculate weight of all symbols//
+//calculate weight of all letters in array//
+
 int NamesSortWoSTL::GetWeight(){
     int result = 0;
     int counter = 0;
