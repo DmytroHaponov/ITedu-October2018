@@ -18,15 +18,14 @@ int main(){
     std::cout<<"Enter the total number of names: ";
     std::cin>>nameN;
     unsigned int i(0),j(0);
-    /*
+
     std::ofstream names_in("names.txt");
     if(!names_in){
-        std::cout<<"Unable to open the file.\n";
-        return EXIT_FAILURE;
+        std::cout<<"Unable to open the file for writing.\n";
+        return -1;
     }
     for(;i<nameN;i++){
         for(;j<nameLength;j++){
-            //srand(time_t(nullptr));
             output=roster.at(std::rand()%ROSTER_SIZE);
             currName+=output;//⍰чого він не переповнюється?
         }
@@ -34,13 +33,12 @@ int main(){
         names_in<<currName<<std::endl;//write into file!
     }
     names_in.close();
-*/
-    //std::cout<<"Size of one name is "<<currName.length()<<'\n';
+
 
     std::fstream names_sort("names.txt",std::ios::in|std::ios::out);
     if(!names_sort){
-        std::cout<<"Unable..."<<'\n';
-        return EXIT_FAILURE;
+        std::cout<<"Unable to open the file for sorting."<<'\n';
+        return -1;
     }
     std::string st1;//set max capacity? Initialize?
     std::string st2;
@@ -50,7 +48,6 @@ int main(){
         names_sort.seekg(i*(nameLength+2),std::ios::beg);
         names_sort>>st1;
         min=st1;
-        //std::cout<<st1<<std::endl;
         for(j=i+1;j<nameN;j++){
             names_sort.seekg(j*(nameLength+2),std::ios::beg);
             names_sort>>st2;
@@ -58,7 +55,6 @@ int main(){
                 min=st2;
                 minpos=j*(nameLength+2);
             }
-            //std::cout<<st2<<std::endl;
         }
         if(st1>min){
             names_sort.seekp(i*(nameLength+2),std::ios::beg);
@@ -69,6 +65,5 @@ int main(){
     }
     names_sort.close();
 
-
-    return EXIT_SUCCESS;
+    return 0;
 }
