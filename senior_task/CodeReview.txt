@@ -1,0 +1,34 @@
+List of issues:
+1)line 1 in exercise3_data.h - unnecessarily empty line - delete 1 line pls;
+2)line all in exercise3_data - describing bodies of members in h file. h files should not content working logic
+code - only defenitions - please move defenitions to cpp file, so it would be much pritier and easy to read by convention.
+Also you might consider creating hpp files instead of h ones, so it would be more apparent that you are using c++ exactly;
+3)line 15 in exercise3_data.h - deletion of ptr without deleting the content that it points to
+- please add [] (square breakets) after delete key word to solve it;
+4)line 20 in exercise3_data.h - memory leak due to incorrect copying - to assign ptr_data like this it means that data that 
+this ptr points to (which is located on heap) would be unaccessible. Because no pointer will point to it. Thus it would not be
+deleted, so if you want to assign like that, you should previously delete memory allocated for ptr_data object.
+Also after copying ptr using your methoud you will end up having to pointers pointing to the same entity. Change of one of them
+will result in changing the whole object, which is dangerous and unconvinient. So you shold consider using
+std::move;
+5) line 11 in exercise3_data.h - exception might appear inside fill func - try to separate call of fill func from the constructor.
+6)line 23 in exercise3_data.h - shady syntax usage - what is <int(void)>?
+7)line 23 in exercise3_data.h - member starts with a capital letter - according to convention function names should not starts
+with a capital letter even if you are into CamelCase;
+8)line 27 in exercise3_data.h - magical number detected - don't use numbers that are taken from nowhere. Please use
+#define to give such numbers a proper understandable name. But in your case you should probably use size variable instead of
+64 number. That's because using even defined const may result into undefined behaviour since you can't be
+100 percent sure what is located inside that memory cell;
+9)line 28 in exercise3_data.h - no need to pass [&] - if you want to pass not a big amount of parameters in lambda then it's better
+to give it this several argument manually;
+10)line 28 in exercise3_data.h - no need to use lambda - it''s just a little memory waster in this case. Just write all the code that is 
+inside lambda in upper function;
+11)line 35 in exercise3_data - incrementing pointer instead of data - if you want to increment the data then use (*current_position)++.
+/12)line 24 in exercise3.cpp- unnecessarily complex returning value - since we don't need lambda anymore we don't need such a strange returning value.  
+13)line 13 in exercise3.cpp- too complex syntax to call one method - classes should provide simple user interface.
+14)line 1 in exercise3_data.h - no safety for several times connection - consider using  either #pragma once of #ifndef
+
+15)line 11 in exercise3_data - not checking the result operation - fill function returns int and i suppose it may be the number
+of elements that has been filled or smth. In that case you shoul also check if this number equals to the size of an array
+16)Try using more stl and espacially stl containers such as vector - it comes in handy all the time and it's much better to 
+use stl instead of rough arrays because stl is safe and convenient to use.
