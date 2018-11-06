@@ -95,7 +95,7 @@ void SecondWindow::about(){
                       "SQLite Version 3\n\n"
                       "SQlite DB Viewer is an open source, freeware visual tool used to create and edit "
                       "SQLite database files.\n\n\n"
-                      "This software uses  (L)GPL v3 license Qt Toollkit from "
+                      "This software uses  (L)GPL v3 license Qt Toollkit from https://www.qt.io/\n\n"
                       "Visit the https://www1.qt.io/licensing/ for licensing terms and information\n\n"
                       "Source code is availible on GitHub");
     aboutBox->show();
