@@ -25,6 +25,8 @@ void assign_string(char array1[], char tobeassigned[]);
 
 void sort(char **array,const int &number_of_elements);
 
+bool is_in_arr(char element_to_seek4, char* arr);
+
 char** gen_2d_array(int words_number);
 
 #endif // HEADER_H
