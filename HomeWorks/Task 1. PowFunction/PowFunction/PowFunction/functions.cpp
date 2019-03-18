@@ -1,3 +1,5 @@
+#include "functions.h"
+
 double my_pow(int base, int exponent)
 {
     double res = base;
