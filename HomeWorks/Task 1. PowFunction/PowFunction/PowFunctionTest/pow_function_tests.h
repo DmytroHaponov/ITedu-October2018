@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-#include "../PowFunction/functions.cpp"
+#include "../PowFunction/functions.h"
 
 TEST(PowFunctionTest, PowInputsTest2_2)
 {

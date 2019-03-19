@@ -1,0 +1,1 @@
+You shoud write function which should receive string and check if it is palindrom.

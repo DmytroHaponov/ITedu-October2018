@@ -6,12 +6,12 @@ CONFIG -= app_bundle
 CONFIG += thread
 CONFIG -= qt
 
-INCLUDEPATH += ../PowFunction
+INCLUDEPATH += ../HasVectorOdd
 
 HEADERS += \
-    ../PowFunction/functions.h\
-    pow_function_tests.h
+        ../HasVectorOdd/vector_functions.h\
+        vector_functions_test.h
 
 SOURCES += \
-        ../PowFunction/functions.cpp\
+        ../HasVectorOdd/vector_functions.cpp\
         main.cpp

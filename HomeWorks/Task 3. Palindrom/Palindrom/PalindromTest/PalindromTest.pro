@@ -6,12 +6,12 @@ CONFIG -= app_bundle
 CONFIG += thread
 CONFIG -= qt
 
-INCLUDEPATH += ../PowFunction
+INCLUDEPATH += ../Palindrom
 
 HEADERS += \
-    ../PowFunction/functions.h\
-    pow_function_tests.h
+    palindrom_tests.h \
+    ../Palindrom/functions.h
 
 SOURCES += \
-        ../PowFunction/functions.cpp\
-        main.cpp
+        main.cpp \
+	../Palindrom/functions.cpp
