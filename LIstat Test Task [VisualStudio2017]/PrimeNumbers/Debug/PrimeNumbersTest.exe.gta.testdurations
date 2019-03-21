@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Executable>C:\Users\neoli\Desktop\PrimeNumbers\Debug\PrimeNumbersTest.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="IntervalTest.Interval_Async_50_to_60_Test" Duration="2" />
+    <TestDuration Test="IntervalTest.Interval_100_to_110_Test" Duration="1" />
+    <TestDuration Test="IntervalTest.Interval_150_to_130_Test" Duration="1" />
+    <TestDuration Test="IntervalTest.Interval_151_to_120_Test" Duration="1" />
+    <TestDuration Test="IntervalTest.Interval_minus5_to_10_Test" Duration="1" />
+    <TestDuration Test="XMLReaderTest.XMLReader_Parse_and_GetIntervals_Test" Duration="3" />
+  </TestDurations>
+</GtaTestDurations>
