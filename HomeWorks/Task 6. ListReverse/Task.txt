@@ -1,0 +1,1 @@
+You should create simple single linked list and reverse it in one run.
